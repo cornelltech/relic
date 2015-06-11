@@ -699,7 +699,7 @@
 /* Arduino platform. */
 #define DUINO    7
 /** Detected operation system. */
-#define OPSYS    MACOSX
+#define OPSYS    LINUX
 
 /** No multithreading. */
 #define NONE     1
@@ -725,7 +725,7 @@
 /** Cycle-counting timer. */
 #define CYCLE    7
 /** Chosen timer. */
-#define TIMER    ANSI
+#define TIMER    HPROC
 
 /** Prefix to identity this build of the library. */
 /* #undef LABEL */

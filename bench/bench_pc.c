@@ -597,7 +597,7 @@ static void util(void) {
 
 static void arith(void) {
 	gt_t a, b, c;
-	bn_t d;
+	bn_t d, n;
 
 	gt_new(a);
 	gt_new(b);
@@ -627,6 +627,15 @@ static void arith(void) {
 	BENCH_BEGIN("gt_exp") {
 		gt_rand(a);
 		g1_get_ord(d);
+		BENCH_ADD(gt_exp(c, a, d));
+	}
+	BENCH_END;
+
+	BENCH_BEGIN("gt_exp_k") {
+		g1_get_ord(n);
+		bn_rand_mod(d, n);
+
+		gt_rand(a);
 		BENCH_ADD(gt_exp(c, a, d));
 	}
 	BENCH_END;
