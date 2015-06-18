@@ -7,3 +7,4 @@ install_manifest.txt
 doc/*
 bin/*
 lib/*
+include/relic_conf.h
