@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 Extracts an ABI description using very specific heuristics for certain RELIC 
-modules.
+modules. Presently: relic_pc and relic_ec moudules.
 """
 import json, collections, re
 
@@ -30,9 +30,12 @@ paramNameTable = \
     "L" : "int",
     "C" : "int",
 
-    # K,N = multiprecision int
+    # common params that are multiprecision int
     "K" : "bn_t",
     "N" : "bn_t",
+    "X" : "bn_t",
+    "Y" : "bn_t",    
+    "H" : "bn_t",
 }
 
 # Known function name prefixes and the data types they operate on.
@@ -41,6 +44,7 @@ prefixTable = \
     "g1" : "g1_t",
     "g2" : "g2_t",
     "gt" : "gt_t",
+    "ec" : "ec_t",
 }
 
 def processFile(filename):

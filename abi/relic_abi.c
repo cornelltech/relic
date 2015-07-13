@@ -16,8 +16,49 @@ typedef unsigned char byte;
 #define VALUE_TO_STRING(x) #x
 #define VALUE(x) VALUE_TO_STRING(x)
 #define PRINTM(var) #var "="  VALUE(var)
-#pragma message(PRINTM(BN_SIZE))
-#pragma message(PRINTM(EPX_TABLE_LWNAF))
+
+// These can be used to print fully expanded macro definitions for inspection.
+// #pragma message(PRINTM(BN_SIZE))
+// #pragma message(PRINTM(EPX_TABLE_LWNAF))
+// relic_ec
+void ec_null_abi(ec_t A) { ec_null(A); }
+void ec_new_abi(ec_t A) { ec_new(A); }
+void ec_free_abi(ec_t A) { ec_free(A); }
+void ec_curve_get_gen_abi(ec_t G) { ec_curve_get_gen(G); }
+void ec_curve_get_tab_abi(void) { ec_curve_get_tab(); }
+void ec_curve_get_ord_abi(bn_t N) { ec_curve_get_ord(N); }
+void ec_curve_get_cof_abi(bn_t H) { ec_curve_get_cof(H); }
+void ec_param_set_any_abi(void) { ec_param_set_any(); }
+void ec_param_print_abi(void) { ec_param_print(); }
+void ec_param_get_abi(void) { ec_param_get(); }
+void ec_param_level_abi(void) { ec_param_level(); }
+void ec_is_infty_abi(ec_t P) { ec_is_infty(P); }
+void ec_set_infty_abi(ec_t P) { ec_set_infty(P); }
+void ec_copy_abi(ec_t R, ec_t P) { ec_copy(R, P); }
+void ec_cmp_abi(ec_t P, ec_t Q) { ec_cmp(P, Q); }
+void ec_rand_abi(ec_t P) { ec_rand(P); }
+void ec_is_valid_abi(ec_t P) { ec_is_valid(P); }
+void ec_size_bin_abi(ec_t A, int P) { ec_size_bin(A, P); }
+void ec_read_bin_abi(ec_t A, byte* B, int L) { ec_read_bin(A, B, L); }
+void ec_write_bin_abi(byte* B, int L, ec_t A, int P) { ec_write_bin(B, L, A, P); }
+void ec_print_abi(ec_t P) { ec_print(P); }
+void ec_neg_abi(ec_t R, ec_t P) { ec_neg(R, P); }
+void ec_add_abi(ec_t R, ec_t P, ec_t Q) { ec_add(R, P, Q); }
+void ec_sub_abi(ec_t R, ec_t P, ec_t Q) { ec_sub(R, P, Q); }
+void ec_dbl_abi(ec_t R, ec_t P) { ec_dbl(R, P); }
+void ec_mul_abi(ec_t R, ec_t P, bn_t K) { ec_mul(R, P, K); }
+void ec_mul_gen_abi(ec_t R, bn_t K) { ec_mul_gen(R, K); }
+void ec_mul_dig_abi(ec_t R, ec_t P, dig_t K) { ec_mul_dig(R, P, K); }
+void ec_mul_pre_abi(ec_t* T, ec_t P) { ec_mul_pre(T, P); }
+void ec_mul_fix_abi(ec_t R, ec_t* T, bn_t K) { ec_mul_fix(R, T, K); }
+void ec_mul_sim_abi(ec_t R, ec_t P, bn_t K, ec_t Q, bn_t L) { ec_mul_sim(R, P, K, Q, L); }
+void ec_mul_sim_gen_abi(ec_t R, bn_t K, ec_t Q, bn_t L) { ec_mul_sim_gen(R, K, Q, L); }
+void ec_norm_abi(ec_t R, ec_t P) { ec_norm(R, P); }
+void ec_map_abi(ec_t P, byte* M, int L) { ec_map(P, M, L); }
+void ec_pck_abi(ec_t R, ec_t P) { ec_pck(R, P); }
+void ec_upk_abi(ec_t R, ec_t P) { ec_upk(R, P); }
+void ec_get_x_abi(bn_t X, ec_t P) { ec_get_x(X, P); }
+void ec_get_y_abi(bn_t Y, ec_t P) { ec_get_y(Y, P); }
 // relic_bn
 void bn_rand_abi(bn_t a, int sign, int bits) { bn_rand(a, sign, bits); }
 void bn_print_abi(bn_t a) { bn_print(a); }
@@ -84,9 +125,9 @@ void gt_sqr_abi(gt_t R, gt_t P) { gt_sqr(R, P); }
 void g1_norm_abi(g1_t R, g1_t P) { g1_norm(R, P); }
 void g2_norm_abi(g2_t R, g2_t P) { g2_norm(R, P); }
 void g1_mul_abi(g1_t R, g1_t P, bn_t K) { g1_mul(R, P, K); }
-void g1_mul_dig_abi(g1_t R, g1_t P, bn_t K) { g1_mul_dig(R, P, K); }
+void g1_mul_dig_abi(g1_t R, g1_t P, dig_t K) { g1_mul_dig(R, P, K); }
 void g2_mul_abi(g2_t R, g2_t P, bn_t K) { g2_mul(R, P, K); }
-void g2_mul_dig_abi(g2_t R, g2_t P, bn_t K) { g2_mul_dig(R, P, K); }
+void g2_mul_dig_abi(g2_t R, g2_t P, dig_t K) { g2_mul_dig(R, P, K); }
 void gt_exp_abi(gt_t R, gt_t P, bn_t K) { gt_exp(R, P, K); }
 void g1_mul_gen_abi(g1_t R, bn_t K) { g1_mul_gen(R, K); }
 void g2_mul_gen_abi(g2_t R, bn_t K) { g2_mul_gen(R, K); }
@@ -94,10 +135,10 @@ void g1_mul_pre_abi(g1_t* T, g1_t P) { g1_mul_pre(T, P); }
 void g2_mul_pre_abi(g2_t* T, g2_t P) { g2_mul_pre(T, P); }
 void g1_mul_fix_abi(g1_t R, g1_t* T, bn_t K) { g1_mul_fix(R, T, K); }
 void g2_mul_fix_abi(g2_t R, g2_t* T, bn_t K) { g2_mul_fix(R, T, K); }
-void g1_mul_sim_abi(g1_t R, g1_t P, bn_t K, g1_t Q, int L) { g1_mul_sim(R, P, K, Q, L); }
-void g2_mul_sim_abi(g2_t R, g2_t P, bn_t K, g2_t Q, int L) { g2_mul_sim(R, P, K, Q, L); }
-void g1_mul_sim_gen_abi(g1_t R, bn_t K, g1_t Q, int L) { g1_mul_sim_gen(R, K, Q, L); }
-void g2_mul_sim_gen_abi(g2_t R, bn_t K, g2_t Q, int L) { g2_mul_sim_gen(R, K, Q, L); }
+void g1_mul_sim_abi(g1_t R, g1_t P, bn_t K, g1_t Q, bn_t L) { g1_mul_sim(R, P, K, Q, L); }
+void g2_mul_sim_abi(g2_t R, g2_t P, bn_t K, g2_t Q, bn_t L) { g2_mul_sim(R, P, K, Q, L); }
+void g1_mul_sim_gen_abi(g1_t R, bn_t K, g1_t Q, bn_t L) { g1_mul_sim_gen(R, K, Q, L); }
+void g2_mul_sim_gen_abi(g2_t R, bn_t K, g2_t Q, bn_t L) { g2_mul_sim_gen(R, K, Q, L); }
 void g1_map_abi(g1_t P, byte* M, int L) { g1_map(P, M, L); }
 void g2_map_abi(g2_t P, byte* M, int L) { g2_map(P, M, L); }
 void pc_map_abi(gt_t R, g1_t P, g2_t Q) { pc_map(R, P, Q); }
